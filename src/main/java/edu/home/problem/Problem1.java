@@ -9,21 +9,22 @@ public class Problem1 {
     public List<Integer> getAnagramIndices(String haystack, String needle ) {
         List<Integer> anagramIndices = new ArrayList<Integer>();
 
-        int needleLength = needle.length();
-        int haystackLength = haystack.length();
-
-        for( int i = 0; i < haystackLength - needleLength; i++ ) {
-            String haystackSub = haystack.substring(i, i + needleLength);
-            if( areAnangrams(needle, haystackSub) ) {
-                anagramIndices.add(i);
+        if( haystack != null && needle != null ) {
+            int needleLength = needle.length();
+            int haystackLength = haystack.length();
+            if( haystackLength > 0 && needleLength > 0 ) {
+                for (int i = 0; i <= haystackLength - needleLength; i++) {
+                    String haystackSub = haystack.substring(i, i + needleLength);
+                    if (areAnangrams(needle, haystackSub)) {
+                        anagramIndices.add(i);
+                    }
+                }
             }
         }
-
         return anagramIndices;
     }
 
     private boolean areAnangrams(String str1, String str2) {
-
         StringBuffer str2buff = new StringBuffer(str2);
         str2buff.indexOf("");
         if( str1.length() == str2.length()
@@ -43,6 +44,10 @@ public class Problem1 {
     public static void main(String[] args) {
         Problem1 problem1 = new Problem1();
         List<Integer> anagaramIndices = problem1.getAnagramIndices("bbbababaaabbbb", "ab" );
+        System.out.println("anagaramIndices = " + anagaramIndices);
+        anagaramIndices = problem1.getAnagramIndices("bbbababaaabbbb", "" );
+        System.out.println("anagaramIndices = " + anagaramIndices);
+        anagaramIndices = problem1.getAnagramIndices("a", "a" );
         System.out.println("anagaramIndices = " + anagaramIndices);
     }
 }
